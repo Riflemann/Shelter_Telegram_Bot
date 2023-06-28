@@ -1,4 +1,4 @@
-package com.example.shelterbot.handlers.text;
+package com.example.shelterbot.model.enums;
 
 public enum ShelterInfoEnum {
     INFO_TEXT("Инфо: \n Здесь вы можете узнать как взять питомца из приюта"),

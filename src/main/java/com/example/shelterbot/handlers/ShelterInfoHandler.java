@@ -1,6 +1,6 @@
 package com.example.shelterbot.handlers;
 
-import com.example.shelterbot.handlers.text.ShelterInfoEnum;
+import com.example.shelterbot.model.enums.ShelterInfoEnum;
 import com.example.shelterbot.message.ShelterMessageImpl;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;

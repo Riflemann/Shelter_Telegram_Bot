@@ -4,6 +4,8 @@ import com.example.shelterbot.message.ShelterMessage;
 import com.example.shelterbot.model.Report;
 import com.example.shelterbot.repository.ReportsRepository;
 import com.pengrad.telegrambot.TelegramBot;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@Slf4j
 public class ReportNotificationTimer {
-    ReportsRepository repository;
-    ShelterMessage shelterMessage;
-    TelegramBot telegramBot;
+    private final ReportsRepository repository;
+    private final  ShelterMessage shelterMessage;
+    private final TelegramBot telegramBot;
 
     public ReportNotificationTimer(ReportsRepository repository, ShelterMessage shelterMessage, TelegramBot telegramBot) {
         this.repository = repository;
@@ -35,6 +38,7 @@ public class ReportNotificationTimer {
                     report.getCreatedTime().toLocalDate().equals(LocalDateTime.now().toLocalDate().minusDays(1))
             ) {
                 System.out.println("Нашёлся");
+                log.info("Отчет найден" + report);
                 shelterMessage.sendMessage(report.getUserOwner().getChatId(), telegramBot, "Вы не отправили отчёт");
             } else {
                 System.out.println("не нашёлся");

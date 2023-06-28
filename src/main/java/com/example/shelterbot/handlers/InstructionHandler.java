@@ -1,6 +1,6 @@
 package com.example.shelterbot.handlers;
 
-import com.example.shelterbot.handlers.text.InstructionsForCatsText;
+import com.example.shelterbot.model.enums.InstructionsForCatsText;
 import com.example.shelterbot.message.ShelterMessageImpl;
 import com.example.shelterbot.model.enums.PetType;
 import com.pengrad.telegrambot.TelegramBot;
