@@ -28,7 +28,7 @@ public interface ReportsRepository extends JpaRepository<Report, Long> {
     void updateText(String text, Long reportID);
 
     @Transactional
-    @Query("SELECT r FROM Report r JOIN User u ON cast(r.userOwner as biginteger) = u.id WHERE u.chatId = :chatID AND r.createdTime = CURRENT_DATE")
+    @Query("SELECT r FROM Report r JOIN r.userOwner u WHERE u.chatId = :chatID AND date_trunc('day', r.createdTime )  = CURRENT_DATE")
     Report getToDayReportByUserOwnerId(Long chatID);
 //    @Transactional
 //    @Query("SELECT Report FROM Report r WHERE r.userOwner = (select User from User u where u.chatId = :chatID) AND r.createdTime = CURRENT_DATE")
