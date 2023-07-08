@@ -19,7 +19,7 @@ create table volunteer
     id       bigserial primary key,
     name     text not null,
     chat_id   bigint not null unique,
-    phone_num text not null
+    phone_num text
 );
 
 create table cats_shelter
@@ -58,7 +58,8 @@ create table reports
     text          text,
     user_owner_id bigserial not null references users (id),
     cat_id        bigint,
-    dog_id        bigint
+    dog_id        bigint,
+    is_checked boolean not null default false
 );
 
 ALTER TABLE users

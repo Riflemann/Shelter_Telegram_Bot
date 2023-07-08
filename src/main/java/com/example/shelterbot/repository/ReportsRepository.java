@@ -27,9 +27,18 @@ public interface ReportsRepository extends JpaRepository<Report, Long> {
     void updateText(String text, Long reportID);
 
     @Transactional
+    @Modifying
+    @Query("UPDATE Report r set r.isChecked = true where r.id = :reportID")
+    void updateIsChecked(long reportID);
+
+    @Transactional
     @Query("SELECT r FROM Report r JOIN r.userOwner u WHERE u.chatId = :chatID AND date_trunc('day', r.createdTime )  = CURRENT_DATE")
-    Report getToDayReportByUserOwnerId(Long chatID);
-//    @Transactional
-//    @Query("SELECT Report FROM Report r WHERE r.userOwner = (select User from User u where u.chatId = :chatID) AND r.createdTime = CURRENT_DATE")
-//    Report getToDayReportByUserOwnerId(Long chatID);
+    Report getToDayReportByUserChatId(Long chatID);
+
+    @Transactional
+    @Query("SELECT r FROM Report r WHERE date_trunc('day', r.createdTime )  = CURRENT_DATE")
+    List<Report> getAllToDayReport();
+
+    @Transactional
+    List<Report> getAllByIsCheckedIsFalse();
 }
